@@ -8,22 +8,14 @@ function Footer() {
     <div className="footer-container">
       <footer className="footer">
         <div>
-          <div className="row">
-            <div className="col-sm-12 col-md-6">
+          <div className="flex justify-between items-center">
+            <div>
               <Link to="/">
                 <img alt="" src={BESTX} />
               </Link>
-              <br />
-              <br />
-              <p className="text-justify">
-                BextX is a game that rewards musicians for creating quality
-                content - and allows fans to contribute to and share in their
-                success.
-              </p>
             </div>
 
-            <div className="col-xs-6 col-md-3">
-              <h6>The Company</h6>
+            <div className="flex justify-between items-center">
               <ul className="footer-links">
                 <li>
                   <Link to="/About" className="elementFooterStyling">About Us</Link>
@@ -32,18 +24,15 @@ function Footer() {
                   <Link to="/FAQs" className="elementFooterStyling">FAQs</Link>
                 </li>
               </ul>
-            </div>
-
-            <div className="col-xs-6 col-md-3">
-              <h6>Contact</h6>
+              <p className="elementFooterStyling">|</p>
               <ul className="footer-links">
                 <li>
-                  <a href="https://twitter.com/BestX_DAO" target="_blank">
+                  <a href="https://twitter.com/BestX_DAO" target="_blank" rel="noreferrer">
                     <FaTwitter className="elementFooterStyling" />
                   </a>
                 </li>
                 <li>
-                  <a href="https://discord.gg/U3YSa8pj" target="_blank">
+                  <a href="https://discord.gg/U3YSa8pj" target="_blank" rel="noreferrer">
                     <FaDiscord className="elementFooterStyling" />
                   </a>
                 </li>
@@ -54,17 +43,20 @@ function Footer() {
                 </li>
               </ul>
             </div>
+
           </div>
-          <hr />
         </div>
 
+        <br />
+
         <div>
-          <div className="row">
-            <div className="col-md-8 col-sm-6 col-xs-12">
-              <span className="copyright-span">
-                All rights reserved, BestX, 2022
-              </span>
-            </div>
+          <div>
+            <p>
+              All rights reserved, BestX, 2022
+              <span className="mx-8">|</span>
+              <Link to="/About" className="elementFooterStyling">Terms of Service</Link>
+              <Link to="/About" className="elementFooterStyling">Privacy Policy</Link>
+            </p>
           </div>
         </div>
       </footer>

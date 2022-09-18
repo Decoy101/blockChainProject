@@ -10,6 +10,7 @@ import FAQs from "./components/FAQs";
 import Home from "./components/Home";
 import ConnectWallet from "./components/ConnectWallet";
 import "./App.css";
+import Homepage from "./pages/Homepage.js";
 
 function App() {
   const styles = {
@@ -78,7 +79,7 @@ function App() {
               <FAQs />
             </Route>
             <Route path="/">
-              <Home />
+              <Homepage />
             </Route>
           </Switch>
         </div>
