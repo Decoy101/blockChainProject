@@ -15,8 +15,6 @@ import Homepage from "./pages/Homepage.js";
 function App() {
   const styles = {
     content: {
-      display: "flex",
-      justifyContent: "center",
       fontFamily: "Roboto, sans-serif",
       marginTop: "130px",
     },
@@ -37,14 +35,7 @@ function App() {
           contract={contract}
           setContract={setContract}
         />
-
-        <div className="bestx">
-          BEST
-          <div style={{ color: "#F1BC33", position: "relative", zIndex: -1 }}>
-            X
-          </div>
-        </div>
-        <div style={styles.content}>
+        <div style={styles.content} className="mx-60">
           <Switch>
             <Route path="/Explore">
               <Explore
