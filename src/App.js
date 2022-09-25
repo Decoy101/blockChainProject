@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Explore from "./components/Explore.js";
+// import Explore from "./components/Explore.js";
 import Rankings from "./components/Rankings";
 import Create from "./components/Create";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import FAQs from "./components/FAQs";
-import Home from "./components/Home";
 import ConnectWallet from "./components/ConnectWallet";
 import "./App.css";
 import Homepage from "./pages/Homepage.js";
+import Explore from "./pages/Explore";
 
 function App() {
   const styles = {
     content: {
       fontFamily: "Roboto, sans-serif",
-      marginTop: "130px",
+      marginTop: "80px",
     },
   };
 
@@ -38,14 +38,15 @@ function App() {
         <div style={styles.content} className="mx-60">
           <Switch>
             <Route path="/Explore">
-              <Explore
+              {/* <Explore
                 contract={contract}
                 setContract={setContract}
                 web3Modal={web3Modal}
                 setWeb3Modal={setWeb3Modal}
                 connected={connected}
                 setConnected={setConnected}
-              />
+              /> */}
+              <Explore />
             </Route>
             <Route path="/Rankings">
               <Rankings />

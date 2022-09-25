@@ -2,7 +2,6 @@ import BESTX from "../media/BestX.svg";
 import keyImage from "../assets/images/key.png";
 import personsImage from "../assets/images/persons.png";
 import moneyImage from "../assets/images/money.png";
-import Footer from "../components/Footer";
 
 function Homepage() {
   return (
@@ -80,8 +79,6 @@ function Homepage() {
         <p className="text-2xl mt-8">You’ll need a crypto wallet to sign up - but we can help you with that! Check out our FAQs for more guidance.</p>
         <button className="border mt-16 rounded-full bg-yellow-400 p-4">Join the beta</button>
       </div>
-
-      <Footer />
     </div >
   );
 }
