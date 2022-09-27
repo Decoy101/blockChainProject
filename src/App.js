@@ -10,12 +10,11 @@ import FAQs from "./components/FAQs";
 import Home from "./components/Home";
 import ConnectWallet from "./components/ConnectWallet";
 import "./App.css";
+import Homepage from "./pages/Homepage.js";
 
 function App() {
   const styles = {
     content: {
-      display: "flex",
-      justifyContent: "center",
       fontFamily: "Roboto, sans-serif",
       marginTop: "130px",
     },
@@ -36,14 +35,7 @@ function App() {
           contract={contract}
           setContract={setContract}
         />
-
-        <div className="bestx">
-          BEST
-          <div style={{ color: "#F1BC33", position: "relative", zIndex: -1 }}>
-            X
-          </div>
-        </div>
-        <div style={styles.content}>
+        <div style={styles.content} className="mx-60">
           <Switch>
             <Route path="/Explore">
               <Explore
@@ -78,7 +70,7 @@ function App() {
               <FAQs />
             </Route>
             <Route path="/">
-              <Home />
+              <Homepage />
             </Route>
           </Switch>
         </div>
