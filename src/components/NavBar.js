@@ -11,7 +11,7 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import { ethers, providers } from "ethers";
 import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 // import { disconnect } from "process";
 

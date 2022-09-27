@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Crown from ".././images/crown0.png";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import RankingImage from ".././images/rankingImage.png";
 import { Link } from "react-router-dom";
 import { bestxAddress } from "../../config-keys";

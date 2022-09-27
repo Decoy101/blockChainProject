@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 // import AlmostGilmour from '.././images/almost_gilmour.svg';
 // import BlackWhite from '.././images/black&white.svg';
 import Crown from ".././images/crown.png";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { FaUser } from "react-icons/fa";
 

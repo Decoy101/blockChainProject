@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { ethers } from "ethers";
 import { useHistory } from "react-router-dom";

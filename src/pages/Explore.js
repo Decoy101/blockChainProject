@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { ethers } from "ethers";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";

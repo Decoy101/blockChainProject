@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Web3Modal from "web3modal";
 import UploadImage from ".././images/uploadImage.png";
-import BestX from "../../build/contracts/BestX.json";
+import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { ethers } from "ethers";
 import Countdown from "./Countdown";
