@@ -4,7 +4,8 @@ import { ethers } from "ethers";
 import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { FaUser } from "react-icons/fa";
+import { postsDummyData } from "../../dev-data/explore";
+import PostCard from "../new-components/Post";
 
 function Explore() {
   const [posts, setPosts] = useState([]);
@@ -21,21 +22,17 @@ function Explore() {
       "http://localhost:7545"
     );
     const bestx = new ethers.Contract(bestxAddress, BestX.abi, provider);
-    const data = await bestx.fetchPosts();
-    const items = await Promise.all(
-      data.map(async (i) => {
-        let item = {
-          itemId: i[0].toNumber(),
-          tokenUrl: i[1],
-          votes: i[2].toNumber(), // votes should only be displayed on closed posts (later on)
-          artist: i[3],
-          status: i[4],
-          description: i[5],
-        };
-        return item;
-      })
-    );
-    setPosts(items)
+    // const posts = await bestx.fetchPosts();
+    const formattedPosts = postsDummyData.map((post) => ({
+      id: post.id,
+      videoUrl: post.videoUrl,
+      votes: post.votes, // votes should only be displayed on closed posts (later on)
+      artist: post.artists,
+      status: post.status,
+      description: post.description,
+      category: post.category,
+    }));
+    setPosts(formattedPosts)
   }
 
   const categoryDropdown = () => {
@@ -217,32 +214,8 @@ function Explore() {
         </div>
         <div className="flex flex-wrap justify-between items-center w-full">
           {
-            posts.map((card, i) =>
-              <div className="mr-4 mb-8 w-[48%] bg-gray-800 rounded-md">
-                <video muted onMouseEnter={(e) => e.target.play()} onMouseLeave={(e) => e.target.pause()}>
-                  <source src={card.tokenUrl} type="video/mp4" />
-                </video>
-                <div className="p-4">
-                  <div className="flex mt-4">
-                    <div className="mr-4 mb-2"><FaUser /></div>
-                    <div>
-                      <p className="font-bold">
-                        {`${card.artist.slice(0, 4)}...${card.artist.slice(-4)} `}
-                        <span className="font-normal">in</span> All Categories
-                      </p>
-                      <p className="font-light">
-                        {card.description.substring(0, 50)}...
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* <div key={i + 1000} className="exploreCardContentRight">
-                    <div style={cardStatusColor} className={cardStatusClass}>
-                      {cardStatus}<img style={cardStatusCrown} className="showCrown showCrown1" src={Crown} alt="" />
-                    </div>
-                  </div> */}
-                </div>
-              </div>
+            posts.map((post, i) =>
+              <PostCard post={post} key={i} />
             )
           }
         </div>
