@@ -1,82 +1,92 @@
-/* 
-This is the format for the "explore" page 
-Each post has the following fields: 
-
-Artist - Description - Status 
-
-if Status is "OPEN" the post will also display OPEN
-else the post will also display:  
-
-Votes - Ranking (Ranking needs to be figured out)
-
-Upon clicking on an OPEN post, the "video details" (from the Figma) page will open
-
-*/
-
-const posts = [
-    {   
-        postId: 0,
-        artist: "@blondeDude",
-        description: "super kick-ass guitar solo",
-        status: "OPEN",
-        votes: 7, 
-        imageUrl:
-    }, 
-    {   
-        postId: 1,
-        artist: "@country_boys",
-        description: "acoustic record",
-        status: "CLOSED",
-        votes: 30, 
-        imageUrl:
-    }, 
-    {   
-        postId: 2,
-        artist: "@the_man",
-        description: "country solo",
-        status: "CLOSED",
-        votes: 53, 
-        imageUrl:
-    }, 
-    {   
-        postId: 3,
-        artist: "@just_friends",
-        description: "outdoorsy jam",
-        status: "OPEN",
-        votes: 54, 
-        imageUrl:
-    }, 
-    {   
-        postId: 4,
-        artist: "@almost_like_gilmour",
-        description: "karaoke night",
-        status: "CLOSED",
-        votes: 21, 
-        imageUrl:
-    }, 
-    {   
-        postId: 5,
-        artist: "@classic_guy",
-        description: "ma latest song",
-        status: "OPEN",
-        votes: 17, 
-        imageUrl:
-    }, 
-    {   
-        postId: 6,
-        artist: "@70's_craze",
-        description: "just me screaming",
-        status: "OPEN",
-        votes: 22, 
-        imageUrl:
-    }, 
-    {   
-        postId: 7,
-        artist: "@citar_god",
-        description: "close your eyes",
-        status: "CLOSED",
-        votes: 26, 
-        imageUrl:
-    }, 
-
-]
+export const postsDummyData = [
+  {
+    id: 0,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 1,
+    artists: "@blondeDude",
+    description: "open organ playing",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://cdn.videvo.net/videvo_files/video/premium/video0298/large_watermarked/601-1_601-0617_preview.mp4",
+    category: "",
+  },
+  {
+    id: 2,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://joy.videvo.net/videvo_files/video/free/2017-10/large_watermarked/170609_F_Varanasi_060_preview.mp4",
+    category: "",
+  },
+  {
+    id: 3,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 4,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 5,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 6,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 7,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 8,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+  {
+    id: 9,
+    artists: "@blondeDude",
+    description: "super kick-ass guitar solo",
+    status: "OPEN",
+    votes: 7,
+    videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
+    category: "",
+  },
+];
