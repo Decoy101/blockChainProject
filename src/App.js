@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-// import Explore from "./components/Explore.js";
 import Rankings from "./components/Rankings";
 import Create from "./components/Create";
-import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import FAQs from "./components/FAQs";
@@ -11,12 +9,13 @@ import ConnectWallet from "./components/ConnectWallet";
 import "./App.css";
 import Homepage from "./pages/Homepage.js";
 import Explore from "./pages/Explore";
+import Navbar from "./new-components/Navbar";
+import VideoDetail from "./pages/VideoDetail";
 
 function App() {
   const styles = {
     content: {
       fontFamily: "Roboto, sans-serif",
-      marginTop: "80px",
     },
   };
 
@@ -27,25 +26,18 @@ function App() {
   return (
     <>
       <div>
-        <NavBar
+        {/* <NavBar
           web3Modal={web3Modal}
           setWeb3Modal={setWeb3Modal}
           connected={connected}
           setConnected={setConnected}
           contract={contract}
           setContract={setContract}
-        />
-        <div style={styles.content} className="mx-60">
+        /> */}
+        <Navbar />
+        <div style={styles.content} className="mx-48">
           <Switch>
             <Route path="/Explore">
-              {/* <Explore
-                contract={contract}
-                setContract={setContract}
-                web3Modal={web3Modal}
-                setWeb3Modal={setWeb3Modal}
-                connected={connected}
-                setConnected={setConnected}
-              /> */}
               <Explore />
             </Route>
             <Route path="/Rankings">
@@ -69,6 +61,9 @@ function App() {
             </Route>
             <Route path="/FAQs">
               <FAQs />
+            </Route>
+            <Route path="/video-details">
+              <VideoDetail />
             </Route>
             <Route path="/">
               <Homepage />
