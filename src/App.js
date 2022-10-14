@@ -4,7 +4,7 @@ import Rankings from "./components/Rankings";
 import Create from "./components/Create";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import FAQs from "./components/FAQs";
+import FAQs from "./pages/FAQs";
 import ConnectWallet from "./components/ConnectWallet";
 import "./App.css";
 import Homepage from "./pages/Homepage.js";
