@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Rankings from "./components/Rankings";
-import Create from "./components/Create";
+import Create from "./pages/Create";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import FAQs from "./pages/FAQs";
@@ -44,14 +44,7 @@ function App() {
               <Rankings />
             </Route>
             <Route path="/Create">
-              <Create
-                web3Modal={web3Modal}
-                setWeb3Modal={setWeb3Modal}
-                connected={connected}
-                setConnected={setConnected}
-                contract={contract}
-                setContract={setContract}
-              />
+              <Create />
             </Route>
             <Route path="/ConnectWallet">
               <ConnectWallet />
