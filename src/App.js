@@ -11,6 +11,7 @@ import Explore from "./pages/Explore";
 import Navbar from "./new-components/Navbar";
 import VideoDetail from "./pages/VideoDetail";
 import Rankings from "./pages/Rankings";
+import Profile from "./pages/Profile";
 
 function App() {
   const styles = {
@@ -57,6 +58,9 @@ function App() {
             </Route>
             <Route path="/video-details">
               <VideoDetail />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
             <Route path="/">
               <Homepage />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function PostCard(props) {
   const { post } = props
   return (
-    <div className="mr-4 mb-8 w-[48%] bg-gray-800 rounded-md">
+    <div className="mr-4 mb-8 w-[48%] bg-gray-800 rounded-xl">
       <Link to={{ pathname: "/video-details", state: { post } }}>
 
         <video muted onMouseEnter={(e) => e.target.play()} src={post.videoUrl} onMouseLeave={(e) => e.target.pause()}>
