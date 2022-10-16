@@ -6,7 +6,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 1,
@@ -15,7 +15,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://cdn.videvo.net/videvo_files/video/premium/video0298/large_watermarked/601-1_601-0617_preview.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://joy.videvo.net/videvo_files/video/free/2017-10/large_watermarked/170609_F_Varanasi_060_preview.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 6,
@@ -60,7 +60,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
   {
     id: 9,
@@ -87,6 +87,6 @@ export const postsDummyData = [
     status: "OPEN",
     votes: 7,
     videoUrl: "https://static.videezy.com/system/resources/previews/000/000/241/original/guitar-close.mp4",
-    category: "",
+    category: "Drum",
   },
 ];

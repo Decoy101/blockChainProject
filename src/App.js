@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Rankings from "./components/Rankings";
 import Create from "./pages/Create";
 import Footer from "./components/Footer";
 import About from "./components/About";
@@ -11,6 +10,7 @@ import Homepage from "./pages/Homepage.js";
 import Explore from "./pages/Explore";
 import Navbar from "./new-components/Navbar";
 import VideoDetail from "./pages/VideoDetail";
+import Rankings from "./pages/Rankings";
 
 function App() {
   const styles = {
@@ -41,7 +41,7 @@ function App() {
               <Explore />
             </Route>
             <Route path="/Rankings">
-              <Rankings />
+              < Rankings />
             </Route>
             <Route path="/Create">
               <Create />
