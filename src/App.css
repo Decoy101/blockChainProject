@@ -266,10 +266,9 @@ body {
 }
 
 .footer-container {
-  position: absolute;
   z-index: 4;
   right: 0;
-  /* top: 1857px; */
+  bottom: 0;
   left: 0;
   padding: 2rem;
   background-color: #2a2a2a;
