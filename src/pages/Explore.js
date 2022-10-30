@@ -4,8 +4,8 @@ import { ethers } from "ethers";
 import BestX from "../web3/BestX.json";
 import { bestxAddress } from "../../config-keys";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { postsDummyData } from "../../dev-data/explore";
 import PostCard from "../new-components/Post";
+import { useMoralisCloudFunction } from "react-moralis";
 
 function Explore() {
   const [posts, setPosts] = useState([]);
@@ -17,22 +17,31 @@ function Explore() {
     loadPosts();
   }, []);
 
+  const { fetch } = useMoralisCloudFunction(
+    "getPosts",
+    { page: 1, pageSize: 100 },
+    { autoFetch: false }
+  );
+
   async function loadPosts() {
-    const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:7545"
-    );
-    const bestx = new ethers.Contract(bestxAddress, BestX.abi, provider);
-    // const posts = await bestx.fetchPosts();
-    const formattedPosts = postsDummyData.map((post) => ({
-      id: post.id,
-      videoUrl: post.videoUrl,
-      votes: post.votes, // votes should only be displayed on closed posts (later on)
-      artist: post.artists,
-      status: post.status,
-      description: post.description,
-      category: post.category,
-    }));
-    setPosts(formattedPosts)
+    fetch({
+      onSuccess: ({ data: posts }) => {
+        const formattedPosts = posts.map((post) => ({
+          id: post.id,
+          videoUrl: post.videoURL,
+          votes: post.votes, // votes should only be displayed on closed posts (later on)
+          artist: post.artists,
+          status: post.status,
+          description: post.description ?? '',
+          category: post.category,
+        }));
+        setPosts(formattedPosts)
+      }
+    });
+    // const provider = new ethers.providers.JsonRpcProvider(
+    //   "http://localhost:7545"
+    // );
+    // const bestx = new ethers.Contract(bestxAddress, BestX.abi, provider);
   }
 
   const categoryDropdown = () => {
