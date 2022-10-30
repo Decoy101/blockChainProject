@@ -13,6 +13,7 @@ import VideoDetail from "./pages/VideoDetail";
 import Rankings from "./pages/Rankings";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import SelectUsername from "./pages/SelectUsername";
 
 function App() {
   const styles = {
@@ -20,22 +21,9 @@ function App() {
       fontFamily: "Roboto, sans-serif",
     },
   };
-
-  const [web3Modal, setWeb3Modal] = useState(null);
-  const [connected, setConnected] = useState(false);
-  const [contract, setContract] = useState(null);
-
   return (
     <>
-      <div>
-        {/* <NavBar
-          web3Modal={web3Modal}
-          setWeb3Modal={setWeb3Modal}
-          connected={connected}
-          setConnected={setConnected}
-          contract={contract}
-          setContract={setContract}
-        /> */}
+      <div className="relative">
         <Navbar />
         <div style={styles.content} className="mx-48">
           <Switch>
@@ -65,6 +53,9 @@ function App() {
             </Route>
             <Route path="/edit-profile">
               <EditProfile />
+            </Route>
+            <Route path="/select-username">
+              <SelectUsername />
             </Route>
             <Route path="/">
               <Homepage />
