@@ -205,7 +205,7 @@ function Explore() {
 
   return (
     <IconContext.Provider value={{ size: "2em" }}>
-      <div>
+      <div className="min-h-screen">
         <p className="text-5xl font-bold mb-12">Explore</p>
         <div className="flex mb-16">
           <div className="relative">

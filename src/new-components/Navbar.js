@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import BESTX from "../media/BestX.svg";
+import avatarImg from "../assets/images/avatar.svg"
+import UserMenu from "./UserMenu";
 
 function Navbar() {
   const { authenticate, isAuthenticated, isAuthenticating, logout } = useMoralis();
+  const [userMenu, setUserMenu] = useState(false);
   const history = useHistory();
+  const location = useLocation()
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -13,6 +17,10 @@ function Navbar() {
       // add your logic here
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    setUserMenu(false);
+  }, [location]);
 
   const login = async () => {
     if (!isAuthenticated) {
@@ -30,14 +38,14 @@ function Navbar() {
   }
 
   const logOut = async () => {
+    setUserMenu(false)
     await logout();
     history.replace('/')
-    console.log("logged out");
   }
 
   return (
     <>
-      <nav className="mx-48 my-16 flex justify-between">
+      <nav className="mx-48 my-16 relative flex justify-between">
         <Link to="/">
           <img src={BESTX} alt="Bextx Logo" />
         </Link>
@@ -48,12 +56,15 @@ function Navbar() {
               <Link className="mr-6 text-2xl" to="/Explore">Explore</Link>
               <Link className="mr-6 text-2xl" to="/Rankings">Rankings</Link>
               <Link className="mr-6 text-2xl" to="/Create">+Create</Link>
-              <button onClick={logOut} disabled={isAuthenticating}>Logout</button>
+              <button onClick={() => setUserMenu(!userMenu)}><img className="w-8" src={avatarImg} alt="avatar" /></button>
             </div>
             :
             <div>
               <button className="mr-2 rounded-full bg-sky-500 px-8 py-2" onClick={login}>Sign In</button>
             </div>
+        }
+        {
+          userMenu ? <UserMenu callbackOnLogout={logOut} /> : null
         }
       </nav>
     </>
