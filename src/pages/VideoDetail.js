@@ -9,8 +9,6 @@ function VideoDetail(props) {
   const [userPosts, setUserPosts] = useState([]);
   const location = useLocation()
 
-  console.log(location.state.post)
-
   useEffect(() => {
     loadPosts();
   }, []);
