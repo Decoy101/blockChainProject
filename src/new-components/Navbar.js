@@ -4,10 +4,15 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import BESTX from "../media/BestX.svg";
 import avatarImg from "../assets/images/avatar.svg"
 import UserMenu from "./UserMenu";
+import DepositDialog from "./DepositDialog";
+import WithdrawDialog from "./WithdrawDialog";
 
 function Navbar() {
   const { authenticate, isAuthenticated, isAuthenticating, logout } = useMoralis();
   const [userMenu, setUserMenu] = useState(false);
+  const [depositDialog, setDepositDialog] = useState(false);
+  const [withdrawDialog, setWithdrawDialog] = useState(false);
+
   const history = useHistory();
   const location = useLocation()
 
@@ -43,6 +48,16 @@ function Navbar() {
     history.replace('/')
   }
 
+  const handleOpenDepositDialog = () => {
+    setUserMenu(false)
+    setDepositDialog(true)
+  }
+
+  const handleOpenWithdrawDialog = () => {
+    setUserMenu(false)
+    setWithdrawDialog(true)
+  }
+
   return (
     <>
       <nav className="mx-48 my-16 relative flex justify-between">
@@ -64,8 +79,10 @@ function Navbar() {
             </div>
         }
         {
-          userMenu ? <UserMenu callbackOnLogout={logOut} /> : null
+          userMenu ? <UserMenu callbackOnLogout={logOut} closeUserMenu={() => setUserMenu(false)} openDepositDialog={handleOpenDepositDialog} openWithdrawDialog={handleOpenWithdrawDialog} /> : null
         }
+        {depositDialog ? <DepositDialog callbackOnClose={() => setDepositDialog(false)} /> : null}
+        {withdrawDialog ? <WithdrawDialog callbackOnClose={() => setWithdrawDialog(false)} /> : null}
       </nav>
     </>
   );

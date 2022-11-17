@@ -3,13 +3,11 @@ import { useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import { Link } from "react-router-dom";
 import avatarImg from "../assets/images/avatar.svg"
-import DepositDialog from "./DepositDialog";
 
 function UserMenu(props) {
   const { user } = useMoralis();
   const [userDetails, setUserDetails] = useState(null);
   const { callbackOnLogout } = props;
-  const [depositDialog, setDepositDialog] = useState(false);
 
   useEffect(() => {
     if (user)
@@ -39,14 +37,14 @@ function UserMenu(props) {
         <p className="mb-4">Balance</p>
         <p className="text-4xl mb-4">$1,234.56</p>
         <p>
-          <button className="underline text-gray-200 mr-4" onClick={()=>setDepositDialog(true)}>deposit</button>
-          <button className="underline text-gray-200">withdraw</button>
+          <button className="underline text-gray-200 mr-4" onClick={props.openDepositDialog}>deposit</button>
+          <button className="underline text-gray-200" onClick={props.openWithdrawDialog}>withdraw</button>
         </p>
       </div>
 
       <hr className="my-4 border border-gray-400" />
       <p className="hover:cursor-pointer" onClick={callbackOnLogout}>log out</p>
-      {depositDialog?<DepositDialog/>:null}
+      
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
-function DepositDialog() {
+function DepositDialog(props) {
   const [depositForm, setDepositForm] = useState({
     fundingSource: '',
     amount: null
@@ -12,7 +13,10 @@ function DepositDialog() {
 
   return (
     <div className="bg-[#3A3A40] fixed top-56 left-1/2 -ml-[12.5%] w-1/4 p-8 rounded-md shadow">
-      <p className="mb-4 font-bold text-3xl">Deposit Funds</p>
+      <div className="text-[#F0F7FA] flex justify-between w-full">
+        <p className="mb-4 font-bold text-3xl">Deposit Funds</p>
+        <AiOutlineClose color="white" size='2em' className=":hover cursor-pointer" onClick={props.callbackOnClose} />
+      </div>
       <hr className="mb-8 border border-gray-500" />
 
       <label for="fundingSource">
@@ -23,7 +27,7 @@ function DepositDialog() {
       <label for="amount">
         Select Amount
       </label>
-      <input onChange={handleOnChange} className="bg-[#52525A] rounded-md p-4 w-full mb-8" placeholder="Amount" id="amount" name="amount" value={depositForm.fundingSource} />
+      <input onChange={handleOnChange} className="bg-[#52525A] rounded-md p-4 w-full mb-8" placeholder="Amount" id="amount" name="amount" value={depositForm.amount} type='number'/>
 
       <div>
         <button
