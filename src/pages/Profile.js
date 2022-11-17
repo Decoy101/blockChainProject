@@ -1,37 +1,70 @@
 import { useEffect, useState } from "react";
-import { postsDummyData } from "../../dev-data/explore";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import moneyImage from "../assets/images/money.png"
 import PostCard from "../new-components/Post";
 
 function Profile() {
+  const { user } = useMoralis();
+  const [userDetails, setUserDetails] = useState(null);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    loadPosts();
-  }, []);
+    if (user)
+      fetchUserProfile()
+  }, [user]);
 
-  async function loadPosts() {
-    const formattedPosts = postsDummyData.map((post) => ({
-      id: post.id,
-      videoUrl: post.videoUrl,
-      votes: post.votes, // votes should only be displayed on closed posts (later on)
-      artist: post.artists,
-      status: post.status,
-      description: post.description,
-      category: post.category,
-    }));
-    setPosts(formattedPosts)
+  const fetchUserProfile = async () => {
+    const userDetails = await user.attributes
+    console.log(userDetails)
+    setUserDetails(userDetails)
   }
 
+  useEffect(() => {
+    loadPosts();
+  }, [userDetails]);
+
+  const getParamsObject = () => {
+    let paramsObject = {
+      page: 1,
+      pageSize: 100,
+      artists: userDetails?.ethAddress
+    }
+
+    return paramsObject
+  }
+
+  const { fetch } = useMoralisCloudFunction(
+    "getPosts",
+    { ...getParamsObject() },
+    { autoFetch: false }
+  );
+
+  async function loadPosts() {
+    fetch({
+      onSuccess: ({ data: posts }) => {
+        const formattedPosts = posts.map((post) => ({
+          id: post.id,
+          videoUrl: post.videoURL,
+          votes: post.votes, // votes should only be displayed on closed posts (later on)
+          artist: post.artists,
+          status: post.status,
+          description: post.description ?? '',
+          category: post.category,
+        }));
+        setPosts(formattedPosts)
+      }
+    });
+  }
+ 
   return (
     <div className="my-40">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-start">
         <div className="flex h-full">
           <img src={moneyImage} alt="Money" className="h-full mr-12" />
           <div className="w-2/4">
-            <p className="text-4xl font-semibold mb-4">username</p>
-            <p className="text-4xl mb-4">Display name</p>
-            <p className="font-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra porta nisl, cursus ut egestas cursus feugiat. Ut aenean massa egestas arcu morbi tempor tristique.</p>
+            <p className="text-4xl font-semibold mb-4">{userDetails?.username}</p>
+            <p className="text-4xl mb-16">Display name</p>
+            <p className="font-light">{userDetails?.bio}</p>
           </div>
         </div>
 

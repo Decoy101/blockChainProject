@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
-import { ethers } from "ethers";
-import BestX from "../web3/BestX.json";
-import { bestxAddress } from "../../config-keys";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import PostCard from "../new-components/Post";
 import { useMoralisCloudFunction } from "react-moralis";
@@ -49,7 +46,6 @@ function Explore() {
           description: post.description ?? '',
           category: post.category,
         }));
-        console.log(formattedPosts)
         setPosts(formattedPosts)
       }
     });
