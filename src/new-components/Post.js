@@ -7,20 +7,33 @@ function PostCard(props) {
     <div className="mr-4 mb-8 w-[48%] bg-gray-800 rounded-xl">
       <Link to={{ pathname: "/video-details", state: { post } }}>
 
-        <video muted onMouseEnter={(e) => e.target.play()} src={post.videoUrl} onMouseLeave={(e) => e.target.pause()}>
+        <video className="w-full" muted onMouseEnter={(e) => e.target.play()} src={post.videoUrl} onMouseLeave={(e) => e.target.pause()}>
         </video>
         <div className="p-4">
-          <div className="flex mt-4">
-            <div className="mr-4 mb-2"><FaUser /></div>
-            <div>
-              <p className="font-bold">
-                {`${post.artist.slice(0, 4)}...${post.artist.slice(-4)} `}
-                <span className="font-normal">in</span> All Categories
-              </p>
-              <p className="font-light">
-                {post.description.substring(0, 50)}...
-              </p>
+          <div className="flex justify-between mt-4">
+            <div className="flex w-3/4">
+              <div className="mr-4 mb-2"><FaUser /></div>
+              <div>
+                <p className="font-bold">
+                  {`${post.artist.slice(0, 4)}...${post.artist.slice(-4)} `}
+                  <span className="font-normal">in</span> {post.category}
+                </p>
+                <p className="font-light">
+                  {post.description.substring(0, 50)}...
+                </p>
+              </div>
             </div>
+
+            <div>
+              {
+                !post.status ?
+                  <div className="p-2 px-4 rounded-md bg-green-700">
+                    Open
+                  </div>
+                  : null
+              }
+            </div>
+
           </div>
 
           {/* <div key={i + 1000} className="exploreCardContentRight">

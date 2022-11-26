@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
-import { ethers } from "ethers";
-import BestX from "../web3/BestX.json";
-import { bestxAddress } from "../../config-keys";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import PostCard from "../new-components/Post";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
 function Explore() {
+  const { isAuthenticated } = useMoralis();
   const [posts, setPosts] = useState([]);
   const [displayCategoryDropdown, setDisplayCategoryDropdown] = useState(false);
   const [displayWeekDropdown, setDisplayWeekDropdown] = useState(false);
   const [displayOpenCloseDropdown, setDisplayOpenCloseDropdown] = useState(false);
+  const [openCloseFilter, setOpenCloseFilter] = useState(null);
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [isAuthenticated]);
+
+  const getParamsObject = () => {
+    let paramsObject = {
+      page: 1,
+      pageSize: 100,
+    }
+
+    if (openCloseFilter === '1') {
+      paramsObject.status = 0
+    }
+
+    return paramsObject
+  }
 
   const { fetch } = useMoralisCloudFunction(
     "getPosts",
-    { page: 1, pageSize: 100 },
+    { ...getParamsObject() },
     { autoFetch: false }
   );
 
@@ -44,6 +56,11 @@ function Explore() {
     // const bestx = new ethers.Contract(bestxAddress, BestX.abi, provider);
   }
 
+  const handleOpenCloseFilter = ()=>{
+    resetDropDowns()
+    loadPosts()
+  }
+
   const categoryDropdown = () => {
     return (
       <div className="w-max rounded-xl absolute left-0 top-16 p-8 bg-gray-800">
@@ -59,7 +76,7 @@ function Explore() {
         <input
           type="radio"
           name="category"
-          id="category-1-2"
+          id="category-2"
           value="2"
         />
         <label className="ml-4" for="category-2">Drum Solos</label>
@@ -108,7 +125,8 @@ function Explore() {
             type="radio"
             name="status"
             id="status-1"
-            value="1"
+            value='0'
+            onChange={(e) => setOpenCloseFilter(e.target.value)}
           />
           <label className="ml-4" for="status-1">
             <p>Open & Closed</p>
@@ -122,7 +140,8 @@ function Explore() {
             type="radio"
             name="status"
             id="status-2"
-            value="2"
+            value='1'
+            onChange={(e) => setOpenCloseFilter(e.target.value)}
           />
           <label className="ml-4" for="status-2">
             <p>Open Only</p>
@@ -134,7 +153,7 @@ function Explore() {
         <hr className="my-4 border-gray-500" />
         <div className="flex justify-end">
           <button onClick={resetDropDowns}>Cancel</button>
-          <button className="rounded-full bg-blue-500 px-4 py-2 ml-3">Save</button>
+          <button onClick={handleOpenCloseFilter} className="rounded-full bg-blue-500 px-4 py-2 ml-3">Save</button>
         </div>
       </div>
     )
