@@ -7,7 +7,7 @@ function PostCard(props) {
     <div className="mr-4 mb-8 w-[48%] bg-gray-800 rounded-xl">
       <Link to={{ pathname: "/video-details", state: { post } }}>
 
-        <video muted onMouseEnter={(e) => e.target.play()} src={post.videoUrl} onMouseLeave={(e) => e.target.pause()}>
+        <video className="w-full" muted onMouseEnter={(e) => e.target.play()} src={post.videoUrl} onMouseLeave={(e) => e.target.pause()}>
         </video>
         <div className="p-4">
           <div className="flex justify-between mt-4">

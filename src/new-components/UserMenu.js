@@ -26,7 +26,7 @@ function UserMenu(props) {
           <img className="w-16" src={avatarImg} alt="avatar" />
         </div>
         <div className="w-3/4">
-          <p className="text-4xl">{userDetails?.username}</p>
+          <Link to="/profile"><p className="text-4xl">{userDetails?.username}</p></Link>
           <p className="text-gray-200">{userDetails?.ethAddress.slice(0, 4)}...{userDetails?.ethAddress.slice(-4)}</p>
           <Link className="text-gray-200 mr-6 text-2xl" to="/edit-profile">edit profile</Link>
         </div>
@@ -44,7 +44,7 @@ function UserMenu(props) {
 
       <hr className="my-4 border border-gray-400" />
       <p className="hover:cursor-pointer" onClick={callbackOnLogout}>log out</p>
-      
+
     </div>
   );
 }

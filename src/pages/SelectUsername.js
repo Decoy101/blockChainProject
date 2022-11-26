@@ -16,7 +16,6 @@ function SelectUsername() {
 
   const fetchUsername = async () => {
     const userName = await user?.get('username')
-    console.log(userName)
     setUserName(userName);
   }
 

@@ -63,7 +63,7 @@ function Profile() {
           <img src={moneyImage} alt="Money" className="h-full mr-12" />
           <div className="w-2/4">
             <p className="text-4xl font-semibold mb-4">{userDetails?.username}</p>
-            <p className="text-4xl mb-16">Display name</p>
+            <p className="text-4xl mb-16">{userDetails?.displayName}</p>
             <p className="font-light">{userDetails?.bio}</p>
           </div>
         </div>

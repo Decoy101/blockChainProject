@@ -8,7 +8,7 @@ import DepositDialog from "./DepositDialog";
 import WithdrawDialog from "./WithdrawDialog";
 
 function Navbar() {
-  const { authenticate, isAuthenticated, isAuthenticating, logout } = useMoralis();
+  const { authenticate, isAuthenticated, logout } = useMoralis();
   const [userMenu, setUserMenu] = useState(false);
   const [depositDialog, setDepositDialog] = useState(false);
   const [withdrawDialog, setWithdrawDialog] = useState(false);
