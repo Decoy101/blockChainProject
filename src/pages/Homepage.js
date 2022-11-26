@@ -2,8 +2,20 @@ import BESTX from "../media/BestX.svg";
 import keyImage from "../assets/images/key.png";
 import personsImage from "../assets/images/persons.png";
 import moneyImage from "../assets/images/money.png";
+import { useMoralis } from "react-moralis";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function Homepage() {
+  const history = useHistory();
+  const { isAuthenticated } = useMoralis();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.replace('/explore')
+    }
+  }, [isAuthenticated]);
+
   return (
     <div>
       <div className="w-1/4">
