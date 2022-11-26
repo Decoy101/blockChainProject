@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import PostCard from "../new-components/Post";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
 function Explore() {
+  const { isAuthenticated } = useMoralis();
   const [posts, setPosts] = useState([]);
   const [displayCategoryDropdown, setDisplayCategoryDropdown] = useState(false);
   const [displayWeekDropdown, setDisplayWeekDropdown] = useState(false);
@@ -13,7 +14,7 @@ function Explore() {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [isAuthenticated]);
 
   const getParamsObject = () => {
     let paramsObject = {

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import { useHistory } from "react-router-dom";
 import moneyImage from "../assets/images/money.png"
 
 function EditProfile() {
   const { user } = useMoralis();
+  const history = useHistory();
   const [editProfileForm, setEditProfileForm] = useState({
     username: '',
     displayName: '',
@@ -19,7 +21,18 @@ function EditProfile() {
   }
 
   const handleSubmit = () => {
-    user.save(editProfileForm);
+    user.save(editProfileForm).then(
+      (user) => {
+        // Execute any logic that should take place after the object is saved.
+        alert("Porfile saved ");
+        history.replace('/profile')
+      },
+      (error) => {
+        // Execute any logic that should take place if the save fails.
+        // error is a Moralis.Error with an error code and message.
+        alert("Failed to create new object, with error code: " + error.message);
+      }
+    );
   }
 
   useEffect(() => {
@@ -28,13 +41,14 @@ function EditProfile() {
   }, [user]);
 
   const fetchUserProfile = async () => {
-    const { username, bio, spotify, youtube, twitter, instagram } = await user.attributes
+    const { username, displayName, bio, spotify, youtube, twitter, instagram } = await user.attributes
     setEditProfileForm({
       ...editProfileForm,
       username: username ?? '',
       bio: bio ?? '',
       spotify: spotify ?? '',
       youtube: youtube ?? '',
+      displayName: displayName ?? '',
       twitter: twitter ?? '',
       instagram: instagram ?? ''
     })
