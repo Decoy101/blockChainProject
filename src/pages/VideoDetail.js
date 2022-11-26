@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
+import { useMoralisCloudFunction } from "react-moralis";
 import { useLocation } from "react-router-dom";
-import { postsDummyData } from "../../dev-data/explore";
 import Post from "../new-components/Post";
 
 function VideoDetail(props) {
@@ -13,18 +13,37 @@ function VideoDetail(props) {
     loadPosts();
   }, []);
 
+  const getParamsObject = () => {
+    let paramsObject = {
+      page: 1,
+      pageSize: 100,
+      artists: location.state.post?.artist
+    }
+
+    return paramsObject
+  }
+
+  const { fetch } = useMoralisCloudFunction(
+    "getPosts",
+    { ...getParamsObject() },
+    { autoFetch: false }
+  );
+
   async function loadPosts() {
-    // const posts = await bestx.fetchPosts();
-    const formattedPosts = postsDummyData.map((post) => ({
-      id: post.id,
-      videoUrl: post.videoUrl,
-      votes: post.votes, // votes should only be displayed on closed posts (later on)
-      artist: post.artists,
-      status: post.status,
-      description: post.description,
-      category: post.category,
-    }));
-    setUserPosts(formattedPosts)
+    fetch({
+      onSuccess: ({ data: posts }) => {
+        const formattedPosts = posts.map((post) => ({
+          id: post.id,
+          videoUrl: post.videoURL,
+          votes: post.votes, // votes should only be displayed on closed posts (later on)
+          artist: post.artists,
+          status: post.status,
+          description: post.description ?? '',
+          category: post.category,
+        }));
+        setUserPosts(formattedPosts)
+      }
+    });
   }
 
   return (
@@ -57,11 +76,11 @@ function VideoDetail(props) {
         </div>
       </div>
 
-      <p className="text-4xl font-bold mb-8">More From @username</p>
+      <p className="text-4xl font-bold mb-8">More From @{location.state.post.artist}</p>
       <div className="flex flex-wrap justify-between items-center w-full">
         {
-          userPosts.map((card, i) =>
-            <Post post={card} />
+          userPosts.map((post, i) =>
+            post.id !== location.state.post.id ? <Post post={post} /> : null
           )
         }
       </div>
