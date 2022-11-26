@@ -10,6 +10,7 @@ function Create() {
   const { user } = useMoralis();
   const videoUploader = useRef();
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
   const [renderError, setRenderError] = useState(false);
   const [userAddress, setUserAddress] = useState(null);
   const [createPostFormValues, setCreatePostFormValues] = useState({
@@ -37,6 +38,7 @@ function Create() {
       setRenderError(true)
     } else if (videoUploader.current.files[0].size < 5000000) {
       setUploadedFile(videoUploader.current.files[0]);
+      setFileUrl(URL.createObjectURL(videoUploader.current.files[0]))
     }
   }
 
@@ -97,7 +99,7 @@ function Create() {
               </div>
               :
               <div className="mb-12 rounded border">
-                <video autoPlay={false} className="w-full" muted src={window.URL.createObjectURL(uploadedFile)} controls>
+                <video autoPlay={false} className="w-full" muted src={fileUrl} controls>
                 </video>
               </div>
           }
