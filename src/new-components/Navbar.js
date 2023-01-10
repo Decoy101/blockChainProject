@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMoralis } from "react-moralis";
+import Web3 from "web3";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import BESTX from "../media/BestX.svg";
 import avatarImg from "../assets/images/avatar.svg"
@@ -8,45 +8,46 @@ import DepositDialog from "./DepositDialog";
 import WithdrawDialog from "./WithdrawDialog";
 
 function Navbar() {
-  const { authenticate, isAuthenticated, logout } = useMoralis();
+  // const { authenticate, isAuthenticated, logout } = useMoralis();
+
   const [userMenu, setUserMenu] = useState(false);
   const [depositDialog, setDepositDialog] = useState(false);
   const [withdrawDialog, setWithdrawDialog] = useState(false);
-
   const history = useHistory();
   const location = useLocation()
-
-  useEffect(() => {
-    if (isAuthenticated) {
-
-      // add your logic here
+  const [isConnected,setIsConnected] = useState(false);
+  
+  const detectProvider = ()=>{
+    let provider;
+    if(window.ethereum){
+      provider = window.ethereum;
     }
-  }, [isAuthenticated]);
+    else if(window.web3){
+      provider = window.web3.currentprovider;
 
-  useEffect(() => {
-    setUserMenu(false);
-  }, [location]);
+    }
+    else{
+      console.log("Non ethereum browser detected. You should install Metamask");
+    }
+    return provider;
+  };
+  const onConnect = async() =>{
+    try{
+      const currentProvider = detectProvider();
+      const web3  = new Web3(currentProvider);
+      const useraccount = await web3.eth.getAccounts();
+      const account = useraccount[0];
+      setIsConnected(true);
 
-  const login = async () => {
-    if (!isAuthenticated) {
-
-      await authenticate({ signingMessage: "Log in using Moralis" })
-        .then(async function (user) {
-          const isUsernameUpdated = await user.get('isUsernameUpdated');
-          if (!isUsernameUpdated)
-            history.replace('/select-username')
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    }
+    catch(err){
+      console.log(err)
     }
   }
-
-  const logOut = async () => {
-    setUserMenu(false)
-    await logout();
-    history.replace('/')
+  const onDisconnect = ()=>{
+    setIsConnected(false);
   }
+
 
   const handleOpenDepositDialog = () => {
     setUserMenu(false)
@@ -66,7 +67,7 @@ function Navbar() {
         </Link>
 
         {
-          isAuthenticated ?
+          isConnected ?
             <div className="flex">
               <Link className="mr-6 text-2xl" to="/Explore">Explore</Link>
               <Link className="mr-6 text-2xl" to="/Rankings">Rankings</Link>
@@ -75,11 +76,11 @@ function Navbar() {
             </div>
             :
             <div>
-              <button className="mr-2 rounded-full bg-sky-500 px-8 py-2" onClick={login}>Sign In</button>
+              <button className="mr-2 rounded-full bg-sky-500 px-8 py-2" onClick={onConnect}>Sign In</button>
             </div>
         }
         {
-          userMenu ? <UserMenu callbackOnLogout={logOut} closeUserMenu={() => setUserMenu(false)} openDepositDialog={handleOpenDepositDialog} openWithdrawDialog={handleOpenWithdrawDialog} /> : null
+          userMenu ? <UserMenu callbackOnLogout={onDisconnect} closeUserMenu={() => setUserMenu(false)} openDepositDialog={handleOpenDepositDialog} openWithdrawDialog={handleOpenWithdrawDialog} /> : null
         }
         {depositDialog ? <DepositDialog callbackOnClose={() => setDepositDialog(false)} /> : null}
         {withdrawDialog ? <WithdrawDialog callbackOnClose={() => setWithdrawDialog(false)} /> : null}
