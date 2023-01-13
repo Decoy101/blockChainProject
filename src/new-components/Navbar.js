@@ -9,36 +9,33 @@ import WithdrawDialog from "./WithdrawDialog";
 
 function Navbar() {
   // const { authenticate, isAuthenticated, logout } = useMoralis();
-
+  const [walletAddress,setWalletAddress] = useState("");
   const [userMenu, setUserMenu] = useState(false);
   const [depositDialog, setDepositDialog] = useState(false);
   const [withdrawDialog, setWithdrawDialog] = useState(false);
   const history = useHistory();
   const location = useLocation()
   const [isConnected,setIsConnected] = useState(false);
-  
-  const detectProvider = ()=>{
-    let provider;
-    if(window.ethereum){
-      provider = window.ethereum;
-    }
-    else if(window.web3){
-      provider = window.web3.currentprovider;
+  useEffect(()=>{
+    getCurrentWalletConnected();
+    addWalletListener();
+  });
 
-    }
-    else{
-      console.log("Non ethereum browser detected. You should install Metamask");
-    }
-    return provider;
-  };
+
   const onConnect = async() =>{
     try{
-      const currentProvider = detectProvider();
-      const web3  = new Web3(currentProvider);
-      const useraccount = await web3.eth.getAccounts();
-      const account = useraccount[0];
-      setIsConnected(true);
-
+      if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
+        try{
+          const accounts = await window.ethereum.request({method:"eth_requestAccounts"});
+          console.log(accounts[0]);
+          setWalletAddress(accounts[0]);
+          setIsConnected(true);
+        }catch(err){
+          console.log(err)
+        }
+      } else{
+        console.log("Please install Metamask")
+      }
     }
     catch(err){
       console.log(err)
@@ -46,8 +43,52 @@ function Navbar() {
   }
   const onDisconnect = ()=>{
     setIsConnected(false);
+    setWalletAddress("");
   }
 
+  const getCurrentWalletConnected = async()=>{
+    if(isConnected === false){
+      console.log("Press Connect")
+    }
+    else{
+      try{
+        if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
+          try{
+            const accounts = await window.ethereum.request({method:"eth_accounts"});
+            if(accounts.length > 0){
+              console.log(accounts[0]);
+              setWalletAddress(accounts[0]);
+              setIsConnected(true);
+            }else{
+              console.log("Connect to MetaMask using the Connect Button");
+            }
+          }catch(err){
+            console.log(err)
+          }
+        } else{
+          console.log("Please install Metamask")
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+
+
+    
+  }
+  const addWalletListener = async()=>{
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
+      window.ethereum.on("accountsChanged",(accounts)=>{
+        setWalletAddress(accounts[0]);
+        setIsConnected(true);
+      })
+    } else{
+      setWalletAddress("");
+      setIsConnected(false);
+      console.log("Please install Metamask")
+    }
+  }
 
   const handleOpenDepositDialog = () => {
     setUserMenu(false)
@@ -67,12 +108,12 @@ function Navbar() {
         </Link>
 
         {
-          isConnected ?
+          walletAddress && isConnected ?
             <div className="flex">
               <Link className="mr-6 text-2xl" to="/Explore">Explore</Link>
               <Link className="mr-6 text-2xl" to="/Rankings">Rankings</Link>
               <Link className="mr-6 text-2xl" to="/Create">+Create</Link>
-              <button onClick={() => setUserMenu(!userMenu)}><img className="w-8" src={avatarImg} alt="avatar" /></button>
+              <button onClick={() => setUserMenu(!userMenu)}>Connected: {walletAddress.substring(0,6)}...{walletAddress.substring(38,40)}</button>
             </div>
             :
             <div>

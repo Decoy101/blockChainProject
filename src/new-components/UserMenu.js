@@ -5,19 +5,11 @@ import { Link } from "react-router-dom";
 import avatarImg from "../assets/images/avatar.svg"
 
 function UserMenu(props) {
-  const { user } = useMoralis();
+  // const { user } = useMoralis();
   const [userDetails, setUserDetails] = useState(null);
-  const { callbackOnLogout } = props;
+  const { callbackOnLogout, closeUserMenu } = props;
 
-  useEffect(() => {
-    if (user)
-      fetchUserProfile()
-  }, [user]);
 
-  const fetchUserProfile = async () => {
-    const userDetails = await user.attributes
-    setUserDetails(userDetails)
-  }
 
   return (
     <div className="absolute top-16 right-0 bg-gray-700 rounded-md w-96 p-4">
@@ -43,7 +35,7 @@ function UserMenu(props) {
       </div>
 
       <hr className="my-4 border border-gray-400" />
-      <p className="hover:cursor-pointer" onClick={callbackOnLogout}>log out</p>
+      <p className="hover:cursor-pointer" onClick={()=>{callbackOnLogout();closeUserMenu();}} >Log out</p>
 
     </div>
   );
