@@ -15,16 +15,21 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import SelectUsername from "./pages/SelectUsername";
 
+
 function App() {
+  const [passLoading,setPassLoading] = useState(false)
+
+
   const styles = {
     content: {
       fontFamily: "Roboto, sans-serif",
     },
   };
+
   return (
     <>
       <div className="relative">
-        <Navbar />
+        <Navbar setPassLoading = {setPassLoading}/>
         <div style={styles.content} className="mx-48">
           <Switch>
             <Route path="/Explore">
@@ -58,7 +63,7 @@ function App() {
               <SelectUsername />
             </Route>
             <Route path="/">
-              <Homepage />
+              <Homepage passLoading={passLoading} />
             </Route>
           </Switch>
         </div>

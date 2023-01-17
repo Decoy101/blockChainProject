@@ -2,23 +2,17 @@ import BESTX from "../media/BestX.svg";
 import keyImage from "../assets/images/key.png";
 import personsImage from "../assets/images/persons.png";
 import moneyImage from "../assets/images/money.png";
-import { useMoralis } from "react-moralis";
+
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-function Homepage() {
+function Homepage({passLoading}) {
   const history = useHistory();
-  const { isAuthenticated } = useMoralis();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.replace('/explore')
-    }
-  }, [isAuthenticated]);
 
   return (
     <div>
-      <div className="w-1/4">
+      {passLoading ? (<p>Change chain</p>):(<><div className="w-1/4">
         <img className="w-full" src={BESTX} alt="bestx-logo" />
         <br />
         <p className="text-justify">
@@ -68,7 +62,7 @@ function Homepage() {
 
       <div className="flex flex-col items-center justify-center text-center -mx-60 h-[500px] bg-[#193C47]">
         <p className="text-3xl">This week’s winners will be announced on
-          <p className="text-3xl font-bold m-4">Friday, May 2nd at 12am ET</p>
+          <span className="text-3xl font-bold m-4">Friday, May 2nd at 12am ET</span>
         </p>
         <div className="flex justify-center my-8">
           <div className="bg-[#031014] p-4 m-6 rounded-md">
@@ -82,7 +76,7 @@ function Homepage() {
           </div>
         </div>
         <p className="text-3xl">The current jackpot is
-          <p className="text-3xl font-bold m-4">$5,243.12 USDC</p>
+          <span className="text-3xl font-bold m-4">$5,243.12 USDC</span>
         </p>
       </div>
 
@@ -90,7 +84,7 @@ function Homepage() {
         <p className="text-4xl font-bold">Ready to show off your skills?</p>
         <p className="text-2xl mt-8">You’ll need a crypto wallet to sign up - but we can help you with that! Check out our FAQs for more guidance.</p>
         <button className="border mt-16 rounded-full bg-yellow-400 p-4">Join the beta</button>
-      </div>
+      </div></>) }
     </div >
   );
 }

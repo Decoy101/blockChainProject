@@ -6,20 +6,28 @@ import avatarImg from "../assets/images/avatar.svg"
 import UserMenu from "./UserMenu";
 import DepositDialog from "./DepositDialog";
 import WithdrawDialog from "./WithdrawDialog";
+import { useMetaMask } from "metamask-react";
+import { ToastContainer, toast } from "react-toastify";
+import { ToasterProperties } from "../utils/toaster";
+import "react-toastify/dist/ReactToastify.css"
 
-function Navbar() {
+function Navbar({setPassLoading}) {
   // const { authenticate, isAuthenticated, logout } = useMoralis();
   const [walletAddress,setWalletAddress] = useState("");
   const [userMenu, setUserMenu] = useState(false);
   const [depositDialog, setDepositDialog] = useState(false);
   const [withdrawDialog, setWithdrawDialog] = useState(false);
-  const history = useHistory();
-  const location = useLocation()
   const [isConnected,setIsConnected] = useState(false);
+  const {chainId} = useMetaMask();
+
   useEffect(()=>{
     getCurrentWalletConnected();
     addWalletListener();
   });
+  useEffect(()=>{
+    handleChainChange();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[chainId]);
 
 
   const onConnect = async() =>{
@@ -46,34 +54,22 @@ function Navbar() {
     setWalletAddress("");
   }
 
-  const getCurrentWalletConnected = async()=>{
-    if(isConnected === false){
-      console.log("Press Connect")
-    }
-    else{
+  const getCurrentWalletConnected = async()=>{ 
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
       try{
-        if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
-          try{
-            const accounts = await window.ethereum.request({method:"eth_accounts"});
-            if(accounts.length > 0){
-              console.log(accounts[0]);
-              setWalletAddress(accounts[0]);
-              setIsConnected(true);
-            }else{
-              console.log("Connect to MetaMask using the Connect Button");
-            }
-          }catch(err){
-            console.log(err)
-          }
-        } else{
-          console.log("Please install Metamask")
+        const accounts = await window.ethereum.request({method:"eth_accounts"});
+        if(accounts.length > 0){
+          setWalletAddress(accounts[0]);
+          setIsConnected(true);
+        }else{
+          console.log("Connect to MetaMask using the Connect Button");
         }
-      }
-      catch(err){
+      }catch(err){
         console.log(err)
       }
+    } else{
+      console.log("Please install Metamask")
     }
-
 
     
   }
@@ -89,6 +85,32 @@ function Navbar() {
       console.log("Please install Metamask")
     }
   }
+  const handleChainChange = async (reload) => {
+    const currentChain = await window.ethereum.request({
+      method: "eth_chainId",
+    });
+
+    if (currentChain !== "0x5") {
+      setPassLoading(true);
+      toast.warn("Switch to Goerli Test Network");
+
+      try {
+       await  window.ethereum
+          .request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x5" }],
+          })
+          .then(() => {
+            setPassLoading(false);
+             window.location.reload(false);
+          });
+      }catch (e) {
+        if(e.code===4001){
+          window.location.reload(false);
+        }
+      }
+    }
+  };
 
   const handleOpenDepositDialog = () => {
     setUserMenu(false)
@@ -126,6 +148,7 @@ function Navbar() {
         {depositDialog ? <DepositDialog callbackOnClose={() => setDepositDialog(false)} /> : null}
         {withdrawDialog ? <WithdrawDialog callbackOnClose={() => setWithdrawDialog(false)} /> : null}
       </nav>
+      <ToastContainer autoClose={3000} position="top-left"/>
     </>
   );
 }
