@@ -7,14 +7,17 @@ import "../src/components/ScrollToTop";
 import ScrollToTop from "../src/components/ScrollToTop";
 import { MetaMaskProvider } from "metamask-react";
 
+
+
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <MetaMaskProvider>
-      <Router>
+    <Router>
         <ScrollToTop />
         <App />
-      </Router>
-    </MetaMaskProvider>
+    </Router>
+    
   </React.StrictMode>,
   document.getElementById("root")
 );

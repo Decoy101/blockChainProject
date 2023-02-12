@@ -16,10 +16,39 @@ import EditProfile from "./pages/EditProfile";
 import SelectUsername from "./pages/SelectUsername";
 
 
-function App() {
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  darkTheme,
+  midnightTheme,
+  lightTheme
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createClient, goerli, WagmiConfig, mainnet } from 'wagmi';
+
+import { publicProvider } from 'wagmi/providers/public';
+
+const { chains, provider } = configureChains(
+  [mainnet,goerli],
+  [
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'BestX',
+  chains
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+})
+
+
+const App = ()=> {
   const [passLoading,setPassLoading] = useState(false)
-
-
   const styles = {
     content: {
       fontFamily: "Roboto, sans-serif",
@@ -28,8 +57,16 @@ function App() {
 
   return (
     <>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider coolMode chains={chains} theme={darkTheme({
+      accentColor: '#7b3fe4',
+      accentColorForeground: 'white',
+      borderRadius: 'small',
+      fontStack: 'system',
+      overlayBlur: 'small',
+    })}>
       <div className="relative">
-        <Navbar setPassLoading = {setPassLoading}/>
+        <Navbar/>
         <div style={styles.content} className="mx-48">
           <Switch>
             <Route path="/Explore">
@@ -69,6 +106,9 @@ function App() {
         </div>
         <Footer />
       </div>
+      </RainbowKitProvider>
+    </WagmiConfig>
+      
     </>
   );
 }
