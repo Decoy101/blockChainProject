@@ -1,6 +1,5 @@
-
-import "react-toastify/dist/ReactToastify.css"
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import "react-toastify/dist/ReactToastify.css";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Link } from "react-router-dom";
 import BESTX from "../media/BestX.svg";
 import UserMenu from "./UserMenu";
@@ -22,7 +21,6 @@ function Navbar() {
   //   handleChainChange();
   // // eslint-disable-next-line react-hooks/exhaustive-deps
   // },[chainId]);
-
 
   // const onConnect = async() =>{
   //   try{
@@ -48,7 +46,7 @@ function Navbar() {
   //   setWalletAddress("");
   // }
 
-  // const getCurrentWalletConnected = async()=>{ 
+  // const getCurrentWalletConnected = async()=>{
   //   if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
   //     try{
   //       const accounts = await window.ethereum.request({method:"eth_accounts"});
@@ -65,7 +63,6 @@ function Navbar() {
   //     console.log("Please install Metamask")
   //   }
 
-    
   // }
   // const addWalletListener = async()=>{
   //   if (typeof window != "undefined" && typeof window.ethereum != "undefined"){
@@ -117,116 +114,136 @@ function Navbar() {
   // }
 
   return (
-
     <>
-      <nav className="mx-48 my-16 relative flex justify-between">
+      <nav className="mx-48 my-16 relative flex justify-between items-center">
         <Link to="/">
           <img src={BESTX} alt="Bestx Logo" />
         </Link>
         <ConnectButton.Custom>
-      {({
-        account,
-        chain,
-        openAccountModal,
-        openChainModal,
-        openConnectModal,
-        authenticationStatus,
-        mounted,
-      }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
-        const connected =
-          ready &&
-          account &&
-          chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openChainModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            // Note: If your app doesn't use authentication, you
+            // can remove all 'authenticationStatus' checks
+            const ready = mounted && authenticationStatus !== "loading";
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === "authenticated");
 
-        return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              'style': {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button onClick={openConnectModal} type="button">
-                    Sign Up
-                  </button>
-                );
-              }
-
-              if (chain.unsupported) {
-                return (
-                  <button onClick={openChainModal} type="button">
-                    Wrong network
-                  </button>
-                );
-              }
-
-              return (
-                <>
-                <div className="flex">
-                <div className="mr-4">
-                <Link className="mr-6 text-2xl" to="/Explore">Explore</Link>
-                <Link className="mr-6 text-2xl" to="/Rankings">Rankings</Link>
-                <Link className="mr-6 text-2xl" to="/Create">+Create</Link>
-                </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
+            return (
+              <div
+                {...(!ready && {
+                  "aria-hidden": true,
+                  style: {
+                    opacity: 0,
+                    pointerEvents: "none",
+                    userSelect: "none",
+                  },
+                })}
+              >
+                {(() => {
+                  if (!connected) {
+                    return (
+                      <button
+                        className="flex items-center rounded-3xl bg-blue-400 text-white w-fit px-5 py-3 hover:scale-105"
+                        onClick={openConnectModal}
+                        type="button"
                       >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6 mr-1"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
                           />
-                        )}
+                        </svg>
+                        Sign Up
+                      </button>
+                    );
+                  }
+
+                  if (chain.unsupported) {
+                    return (
+                      <button onClick={openChainModal} type="button">
+                        Wrong network
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <>
+                      <div className="flex">
+                        <div className="mr-4">
+                          <Link className="mr-6 text-2xl" to="/Explore">
+                            Explore
+                          </Link>
+                          <Link className="mr-6 text-2xl" to="/Rankings">
+                            Rankings
+                          </Link>
+                          <Link className="mr-6 text-2xl" to="/Create">
+                            +Create
+                          </Link>
+                        </div>
+                        <div style={{ display: "flex", gap: 12 }}>
+                          <button
+                            onClick={openChainModal}
+                            style={{ display: "flex", alignItems: "center" }}
+                            type="button"
+                          >
+                            {chain.hasIcon && (
+                              <div
+                                style={{
+                                  background: chain.iconBackground,
+                                  width: 12,
+                                  height: 12,
+                                  borderRadius: 999,
+                                  overflow: "hidden",
+                                  marginRight: 4,
+                                }}
+                              >
+                                {chain.iconUrl && (
+                                  <img
+                                    alt={chain.name ?? "Chain icon"}
+                                    src={chain.iconUrl}
+                                    style={{ width: 12, height: 12 }}
+                                  />
+                                )}
+                              </div>
+                            )}
+                            {chain.name}
+                          </button>
+
+                          <button onClick={openAccountModal} type="button">
+                            {account.displayName}
+                            {account.displayBalance
+                              ? ` (${account.displayBalance})`
+                              : ""}
+                          </button>
+                        </div>
                       </div>
-                    )}
-                    {chain.name}
-                  </button>
-
-                  <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ''}
-                  </button>
-                </div>
-                </div>
-                </>
-              );
-            })()}
-          </div>
-        );
-      }}
-    </ConnectButton.Custom>
-        
-        
+                    </>
+                  );
+                })()}
+              </div>
+            );
+          }}
+        </ConnectButton.Custom>
       </nav>
-
     </>
     // <>
     //   <nav className="mx-48 my-16 relative flex justify-between">
@@ -243,10 +260,10 @@ function Navbar() {
     //           <button onClick={() => setUserMenu(!userMenu)}>Connected: {walletAddress.substring(0,6)}...{walletAddress.substring(38,40)}</button>
     //         </div>
     //         :
-            
+
     //     } */}
     //     <div>
-             
+
     //     </div>
     //     {
     //       userMenu ? <UserMenu callbackOnLogout={onDisconnect} closeUserMenu={() => setUserMenu(false)} openDepositDialog={handleOpenDepositDialog} openWithdrawDialog={handleOpenWithdrawDialog} /> : null
@@ -254,7 +271,7 @@ function Navbar() {
     //     {depositDialog ? <DepositDialog callbackOnClose={() => setDepositDialog(false)} /> : null}
     //     {withdrawDialog ? <WithdrawDialog callbackOnClose={() => setWithdrawDialog(false)} /> : null}
     //   </nav>
-   
+
     // </>
   );
 }
