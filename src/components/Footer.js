@@ -11,28 +11,42 @@ function Footer() {
           <div className="flex justify-between items-center">
             <div>
               <Link to="/">
-                <img alt="" src={BESTX} />
+                <p className="font-extrabold text-white font-sans text-7xl">
+                  Chordif<span className="text-yellow-400">y</span>
+                </p>
               </Link>
             </div>
 
             <div className="flex justify-between items-center">
               <ul className="footer-links">
                 <li>
-                  <Link to="/About" className="elementFooterStyling">About Us</Link>
+                  <Link to="/About" className="elementFooterStyling">
+                    About Us
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/FAQs" className="elementFooterStyling">FAQs</Link>
+                  <Link to="/FAQs" className="elementFooterStyling">
+                    FAQs
+                  </Link>
                 </li>
               </ul>
               <p className="elementFooterStyling">|</p>
               <ul className="footer-links">
                 <li>
-                  <a href="https://twitter.com/BestX_DAO" target="_blank" rel="noreferrer">
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <FaTwitter className="elementFooterStyling" />
                   </a>
                 </li>
                 <li>
-                  <a href="https://discord.gg/U3YSa8pj" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://discord.gg/U3YSa8pj"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <FaDiscord className="elementFooterStyling" />
                   </a>
                 </li>
@@ -43,7 +57,6 @@ function Footer() {
                 </li>
               </ul>
             </div>
-
           </div>
         </div>
 
@@ -52,10 +65,14 @@ function Footer() {
         <div>
           <div>
             <p>
-              All rights reserved, BestX, 2022
+              All rights reserved, Chordify, 2022
               <span className="mx-8">|</span>
-              <Link to="/About" className="elementFooterStyling">Terms of Service</Link>
-              <Link to="/About" className="elementFooterStyling">Privacy Policy</Link>
+              <Link to="/About" className="elementFooterStyling">
+                Terms of Service
+              </Link>
+              <Link to="/About" className="elementFooterStyling">
+                Privacy Policy
+              </Link>
             </p>
           </div>
         </div>
