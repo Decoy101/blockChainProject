@@ -16,7 +16,7 @@ function About() {
         <div>
         <div style={styles.content} className="container">
             <br /><br /><div>
-                <h1><strong>About BestX</strong></h1>
+                <h1><strong>About Chordify</strong></h1>
                 <h2><em>The Problem</em></h2>
                 <p>
                     Most artists are broke. Being an artist is a lifelong mission, full of sacrifices for some, and lots of hours spent developing a craft. Most artists we know need a day job that pays the bills, and when they do get paid for their art, it’s most often ridiculously little.
@@ -42,9 +42,9 @@ function About() {
             </div>
 
             <div>
-            <h2><em>What BestX is and what it's not</em></h2>
+            <h2><em>What Chordify is and what it's not</em></h2>
                 <p>
-                    BestX sits at the intersection of decentralized finance, gaming and content creation. 
+                    Chordify sits at the intersection of decentralized finance, gaming and content creation. 
                     <br/>
                     We are a tool for any artist to dirtectly monetize their content, and get discovered. 
                     <br/>

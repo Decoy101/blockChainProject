@@ -117,7 +117,8 @@ function Navbar() {
     <>
       <nav className="mx-48 my-16 relative flex justify-between items-center">
         <Link to="/">
-          <img src={BESTX} alt="Bestx Logo" />
+          {/* <img src={BESTX} alt="Bestx Logo" /> */}
+          <p>Home</p>
         </Link>
         <ConnectButton.Custom>
           {({
@@ -154,7 +155,7 @@ function Navbar() {
                   if (!connected) {
                     return (
                       <button
-                        className="flex items-center rounded-3xl bg-blue-400 text-white w-fit px-5 py-3 hover:scale-105"
+                        className="flex items-center rounded-3xl bg-yellow-400 text-white w-fit px-5 py-3 hover:scale-105"
                         onClick={openConnectModal}
                         type="button"
                       >
